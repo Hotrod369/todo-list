@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import 'react-native-vector-icons';
 import todoReducer from '../features/todoSlice';
 import counterReducer from '../features/counter/counterSlice';
 

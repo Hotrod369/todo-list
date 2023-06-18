@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import styles from '../src/styles';
+import Styles from '../src/styles';
 
 const TodoTitle: React.FC = () => {
   return (
-    <View style={styles.todoTitle}>
-      <Text style={styles.title}>Todo List</Text>
+    <View style={Styles.todoTitle}>
+      <Text style={Styles.title}>Todo List</Text>
       {/* TODO: Add the list of todos here */}
     </View>
   );
