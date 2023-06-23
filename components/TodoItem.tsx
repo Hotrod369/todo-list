@@ -1,6 +1,5 @@
 import React from 'react';
-import { CheckBox, ListItem } from 'react-native-elements';
-import { TouchableOpacity, Text, View } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 interface TodoItemProps {
   id: number;
@@ -8,7 +7,7 @@ interface TodoItemProps {
   completed: boolean;
   handleToggleTodo: (id: number) => void;
   handleRemoveTodo: (id: number) => void;
-  handleEditTodo: (id: number) => void;
+  handleEditTodo: (id: number, currentText: string) => void; // Accept both id and currentText
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({
@@ -20,24 +19,18 @@ const TodoItem: React.FC<TodoItemProps> = ({
   handleEditTodo,
 }) => {
   return (
-    <ListItem bottomDivider>
+    <View>
+      <Text>{text}</Text>
       <TouchableOpacity onPress={() => handleToggleTodo(id)}>
-        <CheckBox checked={completed} onPress={() => handleToggleTodo(id)} />
-      </TouchableOpacity>
-      <ListItem.Content>
-        <ListItem.Title>
-          <View> {/* Wrap the Text component with a View */}
-            <Text>{text}</Text>
-          </View>
-        </ListItem.Title>
-      </ListItem.Content>
-      <TouchableOpacity onPress={() => handleEditTodo(id)}>
-        <Text>Edit</Text>
+        <Text>Toggle</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => handleRemoveTodo(id)}>
-        <Text>Delete</Text>
+        <Text>Remove</Text>
       </TouchableOpacity>
-    </ListItem>
+      <TouchableOpacity onPress={() => handleEditTodo(id, text)}> {/* Pass id and text */}
+        <Text>Edit</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

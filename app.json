@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hotrod132.TodoApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "owner": "hotrod132",
+    "extra": {
+      "eas": {
+        "projectId": "236c571b-ec28-48fe-81aa-ad4a89f5e6fe"
+      }
     }
   }
 }
