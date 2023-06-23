@@ -57,7 +57,7 @@ const App: React.FC = () => {
               <Text>Show All</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.button}
+              style={[styles.button, styles.completedButton]}
               onPress={() => setShowCompleted(true)}
             >
               <Text>Show Completed</Text>
@@ -67,6 +67,6 @@ const App: React.FC = () => {
       </View>
     </Provider>
   );
-}
+} 
 
 export default App;

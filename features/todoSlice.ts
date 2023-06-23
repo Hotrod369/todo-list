@@ -58,6 +58,11 @@ export const {
   editTodo
 } = todoSlice.actions;
 
+export { Todo } from './Todo';
+
 export default todoSlice.reducer;
+
+
+
 
 

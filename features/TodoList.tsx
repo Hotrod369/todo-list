@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { createSelector } from 'reselect'; // Import createSelector from reselect
 import { RootState } from '../store/index';
 import { Todo, toggleTodo, removeTodo, editTodo } from '../features/todoSlice';
 import Styles from '../src/styles';
@@ -29,29 +30,35 @@ const TodoList: React.FC<TodoListProps> = ({ todos, showCompleted }) => {
     dispatch(editTodo({ id, text: editedText }));
   };
 
-  const selectFilteredTodos = useMemo(
-    () => (state: RootState) =>
-      state.todo.todos.filter((todo) => (showCompleted ? todo.completed : true)),
-    [showCompleted]
-  );
+// Memoized selector using createSelector
+const selectFilteredTodos = createSelector(
+  (state: RootState) => state.todo.todos as Todo[], // Explicitly type todos as Todo[]
+  (state: RootState, showCompleted: boolean) => showCompleted,
+  (todos: Todo[], showCompleted: boolean) =>
+    todos.filter((todo: Todo) => (showCompleted ? todo.completed : true))
+);
 
-  const filteredTodos = useSelector(selectFilteredTodos);
+
+const filteredTodos: Todo[] = useSelector((state: RootState) =>
+  selectFilteredTodos(state, showCompleted)
+);
+
 
   return (
     <ScrollView>
       <View style={Styles.todoList}>
-        {filteredTodos.map((todo: Todo) => (
-          <TodoItem
-            key={todo.id}
-            id={todo.id}
-            text={todo.text}
-            completed={todo.completed}
-            handleToggleTodo={handleToggleTodo}
-            handleRemoveTodo={handleRemoveTodo}
-            handleEditTodo={handleEditTodo}
-          />
-        ))}
-      </View>
+      {filteredTodos.map((todo: Todo) => (
+        <TodoItem
+          key={todo.id}
+          id={todo.id}
+          text={todo.text}
+          completed={todo.completed}
+          handleToggleTodo={handleToggleTodo}
+          handleRemoveTodo={handleRemoveTodo}
+          handleEditTodo={handleEditTodo}
+      />
+      ))}
+     </View>
     </ScrollView>
   );
 };
